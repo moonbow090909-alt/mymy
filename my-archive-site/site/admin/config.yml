@@ -1,0 +1,27 @@
+backend:
+  name: github
+  repo: 깃허브아이디/저장소이름   # 예: myid/my-archive
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+media_folder: images
+locale: ko
+collections:
+  - name: site
+    label: 글 관리
+    files:
+      - name: posts
+        label: 모든 글
+        file: data/posts.json
+        format: json
+        fields:
+          - label: 글 목록
+            name: posts
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - {label: 제목, name: title, widget: string}
+              - {label: 날짜, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD"}
+              - {label: 분류, name: category, widget: select, options: [소설, 원작, 끄적끄적]}
+              - {label: 작품명(시리즈), name: series, widget: string, required: false}
+              - {label: 내용, name: body, widget: text}
