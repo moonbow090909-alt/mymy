@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: repo: moonbow090909-alt/mymy
+  repo: moonbow090909-alt/mymy
   branch: main
   base_url: https://api.netlify.com
   auth_endpoint: auth
