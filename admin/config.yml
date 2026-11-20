@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: 깃허브아이디/저장소이름   # 예: myid/my-archive
+  repo: repo: moonbow090909-alt/mymy
   branch: main
   base_url: https://api.netlify.com
   auth_endpoint: auth
