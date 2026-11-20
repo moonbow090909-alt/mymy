@@ -27,12 +27,12 @@ addEventListener("hashchange",route);
 function side(cat,ser){const cats={};P.forEach(p=>{(cats[p.category]=cats[p.category]||new Set());if(p.series)cats[p.category].add(p.series)});
 let h=`<a href="#/" class="${!cat?"on":""}">전체 기록</a>`;
 for(const c in cats){h+=`<a href="#/c/${enc(c)}" class="${cat==c&&!ser?"on":""}">${esc(c)}</a>`;
-if(cats[c].size)h+=`<div class="sub">`+[...cats[c]].sort().map(s=>`<a href="#/c/${enc(c)}/${enc(s)}" class="${ser==s?"on":""}">${esc(s)}</a>`).join("")+`</div>`}
+if(cats[c].size&&cat==c)h+=`<div class="sub">`+[...cats[c]].sort().map(s=>`<a href="#/c/${enc(c)}/${enc(s)}" class="${ser==s?"on":""}">${esc(s)}</a>`).join("")+`</div>`}
 $("#side").innerHTML=h}
 function route(){const [,t,a,b]=(location.hash||"#/").split("/").map(decodeURIComponent);window.scrollTo(0,0);
-if(t=="p"){const p=P[+a]||P.find(x=>x.id==a);if(!p)return;side(p.category,p.series);
+if(t=="p"){const p=P.find(x=>x.id==+a);if(!p)return;side(p.category,p.series);
 $("#main").innerHTML=`<a class="back" href="javascript:history.back()">← 목록으로</a><article><h1>${esc(p.title)}</h1><div class="m">${esc(p.date)} · ${esc(p.category)}${p.series?" / "+esc(p.series):""}</div><div class="b">${esc(p.body)}</div></article>`;return}
 const cat=t=="c"?a:null,ser=t=="c"?b:null;side(cat,ser);
-const L=P.filter(p=>(!cat||p.category==cat)&&(!ser||p.series==ser));
+let L=P.filter(p=>(!cat||p.category==cat)&&(!ser||p.series==ser));if(ser)L=[...L].sort((x,y)=>String(x.date).localeCompare(String(y.date))||x.id-y.id);
 $("#main").innerHTML=L.length?L.map(p=>`<a class="card" href="#/p/${p.id}"><h2>${esc(p.title)}</h2><small>${esc(p.date)}</small><span>내용 보기</span></a>`).join(""):"<p>아직 글이 없어요.</p>"}
 </script></body></html>
