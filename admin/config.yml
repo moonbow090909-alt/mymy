@@ -7,11 +7,53 @@ backend:
 media_folder: images
 locale: ko
 collections:
-  - name: site
-    label: 글 관리
+  - name: post
+    label: 글
+    label_singular: 글
+    folder: content/posts
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}{{month}}{{day}}-{{hour}}{{minute}}{{second}}"
+    identifier_field: title
+    summary: "{{title}}"
+    sortable_fields: [date, title, series]
+    view_groups:
+      - {label: 작품별 보기, field: series}
+      - {label: 분류별 보기, field: category}
+    view_filters:
+      - {label: 소설, field: category, pattern: 소설}
+      - {label: 원작, field: category, pattern: 원작}
+      - {label: 끄적끄적, field: category, pattern: 끄적끄적}
+      - {label: 🔞 성인글, field: adult, pattern: true}
+    fields:
+      - {label: 제목, name: title, widget: string}
+      - {label: 날짜, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD"}
+      - {label: 분류, name: category, widget: select, options: [소설, 원작, 끄적끄적]}
+      - {label: 작품명(시리즈) - 작품 목록에 먼저 등록하세요, name: series, widget: relation, collection: meta, file: series, search_fields: ["series.*.name"], value_field: "series.*.name", display_fields: ["series.*.name"], required: false}
+      - {label: 회차 순서 (선택, 1화=1 / 비우면 날짜순), name: order, widget: number, value_type: int, required: false}
+      - {label: 🔞 성인용 콘텐츠, name: adult, widget: boolean, default: false}
+      - {label: 내용, name: body, widget: text}
+  - name: meta
+    label: 작품 목록
+    files:
+      - name: series
+        label: 작품 등록 (새 작품일 때만)
+        file: data/series.json
+        format: json
+        fields:
+          - label: 작품들
+            name: series
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - {label: 작품명, name: name, widget: string}
+              - {label: 분류, name: category, widget: select, options: [소설, 원작, 끄적끄적]}
+  - name: legacy
+    label: 예전 글 (이전 방식)
     files:
       - name: posts
-        label: 모든 글
+        label: 예전 글
         file: data/posts.json
         format: json
         fields:
@@ -23,5 +65,5 @@ collections:
               - {label: 제목, name: title, widget: string}
               - {label: 날짜, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD"}
               - {label: 분류, name: category, widget: select, options: [소설, 원작, 끄적끄적]}
-              - {label: 작품명(시리즈), name: series, widget: string, required: false}
+              - {label: 작품명, name: series, widget: string, required: false}
               - {label: 내용, name: body, widget: text}
