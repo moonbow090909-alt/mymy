@@ -1,28 +1,39 @@
 <!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MY ARCHIVE</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet"><style>
-:root{--bg:#0e0f13;--card:#171a22;--line:#242833;--tx:#e8e9ee;--mu:#8a8f9c;--ac:#9db4ff;--red:#ff4d5a;--fs:16px;--lh:1.8;--pg:.8em}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.7 "Noto Sans KR","Malgun Gothic",system-ui,sans-serif}
-header{border-bottom:1px solid var(--line);padding:14px 0}.w{max-width:1100px;margin:0 auto;padding:0 20px}
-header a{color:var(--tx);font-weight:700;letter-spacing:.12em;text-decoration:none}
-.lay{display:flex;gap:40px;padding:36px 0}aside{width:190px;flex:none}
-aside a{display:block;padding:8px 14px;border-radius:8px;color:var(--tx);font-weight:600;text-decoration:none;font-size:15px}
-aside a.on{background:#25272f}aside .sub a{color:var(--mu);font-weight:400;font-size:14px;padding:4px 14px 4px 24px;border-radius:0}
-aside .sub a.on{background:none;color:var(--ac)}main{flex:1;min-width:0}
-.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:14px;color:inherit;text-decoration:none}
-.card h2{margin:0 0 4px;font-size:19px}.card small{color:var(--mu)}.card span{display:block;margin-top:6px;color:var(--ac);font-size:14px}
+:root{--bg:#0e1017;--card:#161a24;--line:#252a38;--tx:#e8e9ee;--mu:#8a90a2;--ac:#9db4ff;--red:#ff4d5a;--fs:16px;--lh:1.8;--pg:.8em}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.7 "Noto Sans KR","Malgun Gothic",system-ui,sans-serif;overflow-x:hidden}
+.w{max-width:1040px;margin:0 auto;padding:0 20px}a{color:inherit;text-decoration:none}
+header{border-bottom:1px solid var(--line);padding:14px 0}header .w{display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:700;letter-spacing:.14em}header nav a{color:var(--mu);font-size:13px;letter-spacing:.1em}
+.hero{padding:64px 0 40px;background:radial-gradient(ellipse 60% 80% at 85% 0%,#1d2b4d55,transparent)}
+.eyebrow{color:var(--ac);font-size:12px;letter-spacing:.18em;margin:0 0 18px}
+.hero h1{margin:0;font-size:clamp(32px,7vw,58px);line-height:1.2;font-weight:700;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;font-weight:300;color:#aab8e8}.hero p.sub{color:var(--mu);margin:20px 0 0}
+.shelf-h{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between;margin:28px 0 18px}
+.shelf-h h2{margin:0;font-size:26px}.shelf-h small{color:var(--ac);font-size:11px;letter-spacing:.18em;display:block;margin-bottom:6px}
+#q{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;color:var(--tx);font:inherit;font-size:14px;width:220px;max-width:100%}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.chips a{border:1px solid var(--line);border-radius:99px;padding:4px 14px;font-size:13px;color:var(--mu)}.chips a.on{background:#25293a;color:var(--tx);border-color:#3a4058}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding-bottom:40px}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;transition:.15s}.card:hover{border-color:#3a4058;transform:translateY(-2px)}
+.top{display:flex;justify-content:space-between;color:var(--mu);font-size:12px;margin-bottom:22px}.tag{border:1px solid var(--line);border-radius:99px;padding:1px 10px;color:var(--tx)}
+.card h3{margin:0 0 4px;font-size:20px;overflow-wrap:anywhere}.card .d{color:var(--mu);font-size:13px}.card .go{display:block;margin-top:18px;color:var(--ac);font-size:13px}
 .red{color:var(--red)}.warn{border:1px solid #5a1d22;background:#2a1013;color:#ff7a84;text-align:center;border-radius:8px;padding:12px;margin:18px 0 28px;font-size:14px}
-article h1{margin:0 0 4px;font-size:26px}article .m{color:var(--mu);font-size:14px}
+.back{color:var(--mu);font-size:14px;display:inline-block;margin:28px 0 8px}
+.row{display:flex;justify-content:space-between;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:10px}.row span{color:var(--mu);font-size:13px;white-space:nowrap}
+.pg h1{margin:8px 0 4px;font-size:28px;overflow-wrap:anywhere}.m{color:var(--mu);font-size:14px}
 .tl{float:right;font-size:13px}.tl button{background:var(--card);color:var(--mu);border:1px solid var(--line);border-radius:6px;padding:2px 10px;cursor:pointer;margin-left:4px}
-.b{font-weight:300;font-size:var(--fs);line-height:var(--lh);max-width:40em;margin-top:24px}.b p{margin:0 0 var(--pg)}
-.pn{display:flex;justify-content:space-between;max-width:40em;margin:56px 0 20px}.pn a,.back{color:var(--mu);text-decoration:none;font-size:14px}
-#up{position:fixed;right:24px;bottom:24px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--tx);font-size:20px;cursor:pointer}
-@media(max-width:720px){.lay{flex-direction:column;gap:16px}aside{width:auto}}
+.b{font-weight:300;font-size:var(--fs);line-height:var(--lh);max-width:40em;margin-top:24px;overflow-wrap:anywhere;word-break:break-word}.b p{margin:0 0 var(--pg)}
+.pn{display:flex;justify-content:space-between;max-width:40em;margin:56px 0 20px}.pn a{color:var(--mu);font-size:14px}.foot{height:60px}
+#up{position:fixed;right:16px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:99;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--tx);font-size:20px;cursor:pointer}
 </style></head><body>
-<header><div class="w"><a href="#/">MY ARCHIVE</a></div></header>
-<div class="w lay"><aside id="side"></aside><main id="main"></main></div>
+<header><div class="w"><a class="logo" href="#/">MY ARCHIVE</a><nav><a href="#/">LIBRARY</a></nav></div></header>
+<main class="w" id="main"></main>
 <button id="up" title="맨 위로" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
 <script>
-let P=[],S=[];const $=s=>document.querySelector(s),enc=encodeURIComponent;
+// ▼ 메인 소개 문구는 여기서 바꾸세요
+const HERO={eyebrow:"A PRIVATE ARCHIVE",title:"나만의 이야기,",em:"한곳에 모아두는 곳.",sub:"소설과 원작, 그리고 끄적끄적."};
+let P=[],S=[],Q="";const $=s=>document.querySelector(s),enc=encodeURIComponent;
 const esc=t=>String(t||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const J=u=>fetch(u+"?"+Date.now()).then(r=>r.ok?r.json():Promise.reject());
 const ord=(x,y)=>(+x.order||0)-(+y.order||0)||String(x.date).localeCompare(String(y.date))||x.id-y.id;
@@ -33,20 +44,25 @@ Promise.all([J("data/all.json").catch(()=>J("data/posts.json")),J("data/series.j
 P=(a.posts||[]).map((p,i)=>({...p,id:i,adult:p.adult===true}));S=b.series||[];
 P.sort((x,y)=>String(y.date).localeCompare(String(x.date))||x.id-y.id);route()}).catch(()=>$("#main").textContent="글을 불러오지 못했어요.");
 addEventListener("hashchange",route);
-function side(cat,ser){const m={};["소설","원작","끄적끄적"].forEach(c=>m[c]=new Set());
-S.forEach(s=>{(m[s.category]=m[s.category]||new Set()).add(s.name)});P.forEach(p=>{(m[p.category]=m[p.category]||new Set());if(p.series)m[p.category].add(p.series)});
-let h=`<a href="#/" class="${!cat?"on":""}">전체 기록</a>`;
-for(const c in m){h+=`<a href="#/c/${enc(c)}" class="${cat==c&&!ser?"on":""}">${esc(c)}</a>`;
-if(m[c].size&&cat==c)h+=`<div class="sub">`+[...m[c]].sort().map(s=>`<a href="#/c/${enc(c)}/${enc(s)}" class="${ser==s?"on":""}">${esc(s)}</a>`).join("")+`</div>`}
-$("#side").innerHTML=h}
-function route(){const [,t,a,b]=(location.hash||"#/").split("/").map(decodeURIComponent);window.scrollTo(0,0);
-if(t=="p"){const p=P.find(x=>x.id==+a);if(!p)return;side(p.category,p.series);
+function items(cat){const m={},out=[];P.forEach(p=>{if(cat&&p.category!=cat)return;
+if(p.series){const k=p.category+"|"+p.series;(m[k]=m[k]||{cat:p.category,name:p.series,list:[],href:`#/s/${enc(p.category)}/${enc(p.series)}`}).list.push(p)}
+else out.push({cat:p.category,name:T(p),list:[p],single:1,adult:p.adult,href:`#/p/${p.id}`})});
+return [...Object.values(m),...out].sort((x,y)=>String(y.list[0].date).localeCompare(String(x.list[0].date)))}
+function shelf(cat){const q=Q.trim().toLowerCase(),L=items(cat).filter(i=>!q||i.name.toLowerCase().includes(q));
+$("#shelf").innerHTML=L.length?L.map(i=>`<a class="card" href="${i.href}"><div class="top"><span class="tag">${esc(i.cat)}</span><span>${i.single?"단편":i.list.length+"화"}</span></div><h3${i.adult?' class="red"':""}>${esc(i.name)}</h3><div class="d">${esc(i.list[0].date)}</div><span class="go">${i.single?"글 읽기":"작품 읽기"} →</span></a>`).join(""):"<p style='color:var(--mu)'>아직 글이 없어요.</p>";
+$("#cnt").textContent=L.length+" WORKS"}
+function route(){const [,t,a,b]=(location.hash||"#/").split("/").map(decodeURIComponent);scrollTo(0,0);
+if(t=="p"){const p=P.find(x=>x.id==+a);if(!p)return;
 const sib=p.series?P.filter(x=>x.series==p.series&&x.category==p.category).sort(ord):[],i=sib.indexOf(p),pv=sib[i-1],nx=sib[i+1];
-const lk=x=>`#/p/${x.id}`,back=p.series?`#/c/${enc(p.category)}/${enc(p.series)}`:`#/c/${enc(p.category)}`;
+const back=p.series?`#/s/${enc(p.category)}/${enc(p.series)}`:`#/c/${enc(p.category)}`;
 const body=String(p.body||"").split(/\n\s*\n/).filter(x=>x.trim()).map(x=>`<p>${esc(x).replace(/\n/g,"<br>")}</p>`).join("");
-$("#main").innerHTML=`<a class="back" href="${back}">← ${esc(p.series||p.category)}로 돌아가기</a><article><div class="tl">글자 <button onclick="fs(-1)">가-</button><button onclick="fs(1)">가+</button></div><h1${cls(p)}>${esc(T(p))}</h1><div class="m">${esc(p.date)} · ${esc(p.category)}${p.series?" / "+esc(p.series):""}</div>${p.adult?'<div class="warn">⚠️ 본 글은 성인 전용 콘텐츠를 포함하고 있습니다.</div>':""}<div class="b">${body}</div></article>
-<div class="pn">${pv?`<a href="${lk(pv)}">← 이전 화</a>`:"<span></span>"}${nx?`<a href="${lk(nx)}">다음 화 →</a>`:"<span></span>"}</div><a class="back" href="${back}">← ${esc(p.series||p.category)}로 돌아가기</a>`;return}
-const cat=t=="c"?a:null,ser=t=="c"?b:null;side(cat,ser);
-let L=P.filter(p=>(!cat||p.category==cat)&&(!ser||p.series==ser));if(ser)L=[...L].sort(ord);
-$("#main").innerHTML=L.length?L.map(p=>`<a class="card" href="#/p/${p.id}"><h2${cls(p)}>${esc(T(p))}</h2><small>${esc(p.date)}</small><span>내용 보기</span></a>`).join(""):"<p>아직 글이 없어요.</p>"}
+$("#main").innerHTML=`<a class="back" href="${back}">← ${esc(p.series||p.category)}로 돌아가기</a><article class="pg"><div class="tl">글자 <button onclick="fs(-1)">가-</button><button onclick="fs(1)">가+</button></div><h1${cls(p)}>${esc(T(p))}</h1><div class="m">${esc(p.date)} · ${esc(p.category)}${p.series?" / "+esc(p.series):""}</div>${p.adult?'<div class="warn">⚠️ 본 글은 성인 전용 콘텐츠를 포함하고 있습니다.</div>':""}<div class="b">${body}</div></article>
+<div class="pn">${pv?`<a href="#/p/${pv.id}">← 이전 화</a>`:"<span></span>"}${nx?`<a href="#/p/${nx.id}">다음 화 →</a>`:"<span></span>"}</div><a class="back" href="${back}">← ${esc(p.series||p.category)}로 돌아가기</a><div class="foot"></div>`;return}
+if(t=="s"||(t=="c"&&b)){const L=P.filter(p=>p.category==a&&p.series==b).sort(ord);
+$("#main").innerHTML=`<a class="back" href="#/">← 작품 보관함</a><div class="pg"><span class="tag" style="border:1px solid var(--line);border-radius:99px;padding:1px 10px;font-size:12px">${esc(a)}</span><h1>${esc(b)}</h1><div class="m" style="margin-bottom:24px">${L.length}화</div></div>`+L.map(p=>`<a class="row" href="#/p/${p.id}"><b${cls(p)}>${esc(T(p))}</b><span>${esc(p.date)}</span></a>`).join("")+`<div class="foot"></div>`;return}
+const cat=t=="c"?a:"",cs=["소설","원작","끄적끄적"];
+$("#main").innerHTML=(cat?"":`<section class="hero"><p class="eyebrow">${HERO.eyebrow} · ${new Date().getFullYear()}</p><h1>${HERO.title}<br><em>${HERO.em}</em></h1><p class="sub">${HERO.sub}</p></section>`)+
+`<div class="shelf-h"><div><small>MY READING SHELF</small><h2>작품 보관함</h2></div><div><input id="q" placeholder="작품 검색" value="${esc(Q)}"> <small id="cnt" style="display:inline;margin-left:8px;color:var(--mu)"></small></div></div>
+<div class="chips"><a href="#/" class="${!cat?"on":""}">전체</a>${cs.map(c=>`<a href="#/c/${enc(c)}" class="${cat==c?"on":""}">${c}</a>`).join("")}</div><div class="grid" id="shelf"></div>`;
+$("#q").oninput=e=>{Q=e.target.value;shelf(cat)};shelf(cat)}
 </script></body></html>
