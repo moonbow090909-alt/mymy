@@ -1,2 +1,15 @@
 <!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>글쓰기</title></head>
-<body><script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script></body></html>
+<body><script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+<script>
+// 글 쓰는 칸의 도구 버튼: 말풍선(상대방/나), 가운데 정렬
+try{
+  const mk=(id,label,tag,field)=>({id,label,fields:[{name:"text",label:field,widget:"text"}],
+    pattern:new RegExp("^\\["+tag+"\\] (.*)$"),
+    fromBlock:m=>({text:m[1]}),
+    toBlock:o=>"["+tag+"] "+String(o.text||"").replace(/\s*\n\s*/g," "),
+    toPreview:o=>"["+tag+"] "+(o.text||"")});
+  CMS.registerEditorComponent(mk("bubble-left","말풍선(상대방)","상대","대사"));
+  CMS.registerEditorComponent(mk("bubble-right","말풍선(나)","나","대사"));
+  CMS.registerEditorComponent(mk("center","가운데 정렬","가운데","내용"));
+}catch(e){console.warn("에디터 버튼 등록 실패",e)}
+</script></body></html>

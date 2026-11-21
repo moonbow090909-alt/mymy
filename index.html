@@ -14,17 +14,17 @@ header{border-bottom:1px solid var(--line);padding:14px 0}header .w{display:flex
 .shelf-h h2{margin:0;font-size:26px}.shelf-h small{color:var(--ac);font-size:11px;letter-spacing:.18em;display:block;margin-bottom:6px}
 #q{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;color:var(--tx);font:inherit;font-size:14px;width:220px;max-width:100%}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.chips a{border:1px solid var(--line);border-radius:99px;padding:4px 14px;font-size:13px;color:var(--mu)}.chips a.on{background:#25293a;color:var(--tx);border-color:#3a4058}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding-bottom:40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,190px));gap:16px;padding-bottom:40px}
 .card{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;transition:.15s}.card:hover{border-color:#3a4058;transform:translateY(-2px)}
 .top{display:flex;justify-content:space-between;color:var(--mu);font-size:12px;margin-bottom:22px}.tag{border:1px solid var(--line);border-radius:99px;padding:1px 10px;color:var(--tx)}
-.card h3{margin:0 0 4px;font-size:20px;overflow-wrap:anywhere}.card .d{color:var(--mu);font-size:13px}.card .go{display:block;margin-top:18px;color:var(--ac);font-size:13px}
+.card h3{margin:0 0 4px;font-size:17px;overflow-wrap:anywhere}.card .d{color:var(--mu);font-size:13px}.card .go{display:block;margin-top:18px;color:var(--ac);font-size:13px}
 .red{color:var(--red)}.warn{border:1px solid #5a1d22;background:#2a1013;color:#ff7a84;text-align:center;border-radius:8px;padding:12px;margin:18px 0 28px;font-size:14px}
 .back{color:var(--mu);font-size:14px;display:inline-block;margin:28px 0 8px}
 .row{display:flex;justify-content:space-between;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:10px}.row span{color:var(--mu);font-size:13px;white-space:nowrap}
 .pg h1{margin:8px 0 4px;font-size:28px;overflow-wrap:anywhere}.m{color:var(--mu);font-size:14px}
 .tl{float:right;font-size:13px}.tl button{background:var(--card);color:var(--mu);border:1px solid var(--line);border-radius:6px;padding:2px 10px;cursor:pointer;margin-left:4px}
 .b{font-weight:300;font-size:var(--fs);line-height:var(--lh);margin-top:24px;overflow-wrap:anywhere;word-break:break-word}.b p{margin:0 0 var(--pg)}
-.pn{display:flex;justify-content:space-between;margin:56px 0 20px}.pn a{color:var(--mu);font-size:14px}.foot{height:60px}.cv{display:block;width:calc(100% + 40px);margin:-20px -20px 16px;aspect-ratio:3/4;object-fit:cover;border-radius:14px 14px 0 0;background:#1d2130}.scv{width:130px;aspect-ratio:3/4;object-fit:cover;border-radius:10px;margin-top:8px;display:block}@media(max-width:600px){.grid{grid-template-columns:repeat(2,1fr);gap:12px}.card{padding:16px}.cv{width:calc(100% + 32px);margin:-16px -16px 14px}}.post{max-width:720px}
+.pn{display:flex;justify-content:space-between;margin:56px 0 20px}.pn a{color:var(--mu);font-size:14px}.foot{height:60px}.bb{display:flex;margin:6px 0}.bb.r{justify-content:flex-end}.bb>div{padding:8px 13px;border-radius:16px;max-width:75%;line-height:1.6;overflow-wrap:anywhere}.bb.l>div{background:#2c303b;border-top-left-radius:3px}.bb.r>div{background:#3d7dd8;color:#fff;border-top-right-radius:3px}.ct{text-align:center}.pi{display:block;max-width:100%;margin:14px auto;border-radius:8px}.cv{display:block;width:calc(100% + 40px);margin:-20px -20px 16px;aspect-ratio:3/4;object-fit:cover;border-radius:14px 14px 0 0;background:#1d2130}.scv{width:130px;aspect-ratio:3/4;object-fit:cover;border-radius:10px;margin-top:8px;display:block}@media(max-width:600px){.grid{grid-template-columns:repeat(2,1fr);gap:12px}.card{padding:16px}.cv{width:calc(100% + 32px);margin:-16px -16px 14px}}.post{max-width:720px}
 #up{position:fixed;right:16px;bottom:calc(20px + env(safe-area-inset-bottom));z-index:99;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--tx);font-size:20px;cursor:pointer}
 </style></head><body>
 <header><div class="w"><a class="logo" href="#/">MY ARCHIVE</a><nav><a href="#/">LIBRARY</a></nav></div></header>
@@ -51,11 +51,18 @@ return [...Object.values(m),...out].sort((x,y)=>String(y.list[0].date).localeCom
 function shelf(cat){const q=Q.trim().toLowerCase(),L=items(cat).filter(i=>!q||i.name.toLowerCase().includes(q));
 $("#shelf").innerHTML=L.length?L.map(i=>`<a class="card" href="${i.href}">${i.cover?`<img class="cv" src="${esc(i.cover)}" alt="" loading="lazy">`:""}<div class="top"><span class="tag">${esc(i.cat)}</span><span>${i.single?"단편":i.list.length+"화"}</span></div><h3${i.adult?' class="red"':""}>${esc(i.name)}</h3><div class="d">${esc(i.list[0].date)}</div><span class="go">${i.single?"글 읽기":"작품 읽기"} →</span></a>`).join(""):"<p style='color:var(--mu)'>아직 글이 없어요.</p>";
 $("#cnt").textContent=L.length+" WORKS"}
+const inl=t=>esc(t.replace(/\\([\\`*_{}\[\]()#+\-.!>~|"'“”])/g,(_,c)=>"\u0001"+c.charCodeAt(0)+"\u0002")).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/(^|[^*])\*([^*\s][^*]*?)\*/g,"$1<i>$2</i>").replace(/\u0001(\d+)\u0002/g,(_,n)=>esc(String.fromCharCode(+n)));
+function render(b){const o=[];let u=[];const f=()=>{if(u.length){o.push("<p>"+u.join("<br>")+"</p>");u=[]}};
+String(b||"").replace(/\r/g,"").replace(/<br\s*\/?>/gi,"\n").split("\n").forEach(l=>{const t=l.replace(/\\$/,"").trim();if(!t){f();return}
+let m;if(m=t.match(/^\[(상대|나)\]\s*(.*)$/)){f();o.push(`<div class="bb ${m[1]=="나"?"r":"l"}"><div>${inl(m[2])}</div></div>`)}
+else if(m=t.match(/^\[가운데\]\s*(.*)$/)){f();o.push(`<p class="ct">${inl(m[1])}</p>`)}
+else if(m=t.match(/^!\[(.*?)\]\((.+?)\)$/)){f();o.push(`<img class="pi" src="${esc(m[2])}" alt="${esc(m[1])}" loading="lazy">`)}
+else u.push(inl(t))});f();return o.join("")}
 function route(){const [,t,a,b]=(location.hash||"#/").split("/").map(decodeURIComponent);scrollTo(0,0);$("#main").className="w"+(t=="p"?" post":"");
 if(t=="p"){const p=P.find(x=>x.id==+a);if(!p)return;
 const sib=p.series?P.filter(x=>x.series==p.series&&x.category==p.category).sort(ord):[],i=sib.indexOf(p),pv=sib[i-1],nx=sib[i+1];
 const back=p.series?`#/s/${enc(p.category)}/${enc(p.series)}`:`#/c/${enc(p.category)}`;
-const body=String(p.body||"").split(/\n\s*\n/).filter(x=>x.trim()).map(x=>`<p>${esc(x).replace(/\n/g,"<br>")}</p>`).join("");
+const body=render(p.body);
 $("#main").innerHTML=`<a class="back" href="${back}">← ${esc(p.series||p.category)}로 돌아가기</a><article class="pg"><div class="tl">글자 <button onclick="fs(-1)">가-</button><button onclick="fs(1)">가+</button></div><h1${cls(p)}>${esc(T(p))}</h1><div class="m">${esc(p.date)} · ${esc(p.category)}${p.series?" / "+esc(p.series):""}</div>${p.adult?'<div class="warn">⚠️ 본 글은 성인 전용 콘텐츠를 포함하고 있습니다.</div>':""}<div class="b">${body}</div></article>
 <div class="pn">${pv?`<a href="#/p/${pv.id}">← 이전 화</a>`:"<span></span>"}${nx?`<a href="#/p/${nx.id}">다음 화 →</a>`:"<span></span>"}</div><a class="back" href="${back}">← ${esc(p.series||p.category)}로 돌아가기</a><div class="foot"></div>`;return}
 if(t=="s"||(t=="c"&&b)){const cv=(S.find(s=>s.name==b)||{}).cover,L=P.filter(p=>p.category==a&&p.series==b).sort(ord);
