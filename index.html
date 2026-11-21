@@ -23,9 +23,9 @@ header{border-bottom:1px solid var(--line);padding:14px 0}header .w{display:flex
 .row{display:flex;justify-content:space-between;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:10px}.row span{color:var(--mu);font-size:13px;white-space:nowrap}
 .pg h1{margin:8px 0 4px;font-size:28px;overflow-wrap:anywhere}.m{color:var(--mu);font-size:14px}
 .tl{float:right;font-size:13px}.tl button{background:var(--card);color:var(--mu);border:1px solid var(--line);border-radius:6px;padding:2px 10px;cursor:pointer;margin-left:4px}
-.b{font-weight:300;font-size:var(--fs);line-height:var(--lh);max-width:40em;margin-top:24px;overflow-wrap:anywhere;word-break:break-word}.b p{margin:0 0 var(--pg)}
-.pn{display:flex;justify-content:space-between;max-width:40em;margin:56px 0 20px}.pn a{color:var(--mu);font-size:14px}.foot{height:60px}
-#up{position:fixed;right:16px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:99;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--tx);font-size:20px;cursor:pointer}
+.b{font-weight:300;font-size:var(--fs);line-height:var(--lh);margin-top:24px;overflow-wrap:anywhere;word-break:break-word}.b p{margin:0 0 var(--pg)}
+.pn{display:flex;justify-content:space-between;margin:56px 0 20px}.pn a{color:var(--mu);font-size:14px}.foot{height:60px}.cv{display:block;width:calc(100% + 40px);margin:-20px -20px 16px;aspect-ratio:3/4;object-fit:cover;border-radius:14px 14px 0 0;background:#1d2130}.scv{width:130px;aspect-ratio:3/4;object-fit:cover;border-radius:10px;margin-top:8px;display:block}@media(max-width:600px){.grid{grid-template-columns:repeat(2,1fr);gap:12px}.card{padding:16px}.cv{width:calc(100% + 32px);margin:-16px -16px 14px}}.post{max-width:720px}
+#up{position:fixed;right:16px;bottom:calc(20px + env(safe-area-inset-bottom));z-index:99;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--tx);font-size:20px;cursor:pointer}
 </style></head><body>
 <header><div class="w"><a class="logo" href="#/">MY ARCHIVE</a><nav><a href="#/">LIBRARY</a></nav></div></header>
 <main class="w" id="main"></main>
@@ -45,21 +45,21 @@ P=(a.posts||[]).map((p,i)=>({...p,id:i,adult:p.adult===true}));S=b.series||[];
 P.sort((x,y)=>String(y.date).localeCompare(String(x.date))||x.id-y.id);route()}).catch(()=>$("#main").textContent="글을 불러오지 못했어요.");
 addEventListener("hashchange",route);
 function items(cat){const m={},out=[];P.forEach(p=>{if(cat&&p.category!=cat)return;
-if(p.series){const k=p.category+"|"+p.series;(m[k]=m[k]||{cat:p.category,name:p.series,list:[],href:`#/s/${enc(p.category)}/${enc(p.series)}`}).list.push(p)}
+if(p.series){const k=p.category+"|"+p.series;(m[k]=m[k]||{cat:p.category,name:p.series,cover:(S.find(s=>s.name==p.series)||{}).cover||"",list:[],href:`#/s/${enc(p.category)}/${enc(p.series)}`}).list.push(p)}
 else out.push({cat:p.category,name:T(p),list:[p],single:1,adult:p.adult,href:`#/p/${p.id}`})});
 return [...Object.values(m),...out].sort((x,y)=>String(y.list[0].date).localeCompare(String(x.list[0].date)))}
 function shelf(cat){const q=Q.trim().toLowerCase(),L=items(cat).filter(i=>!q||i.name.toLowerCase().includes(q));
-$("#shelf").innerHTML=L.length?L.map(i=>`<a class="card" href="${i.href}"><div class="top"><span class="tag">${esc(i.cat)}</span><span>${i.single?"단편":i.list.length+"화"}</span></div><h3${i.adult?' class="red"':""}>${esc(i.name)}</h3><div class="d">${esc(i.list[0].date)}</div><span class="go">${i.single?"글 읽기":"작품 읽기"} →</span></a>`).join(""):"<p style='color:var(--mu)'>아직 글이 없어요.</p>";
+$("#shelf").innerHTML=L.length?L.map(i=>`<a class="card" href="${i.href}">${i.cover?`<img class="cv" src="${esc(i.cover)}" alt="" loading="lazy">`:""}<div class="top"><span class="tag">${esc(i.cat)}</span><span>${i.single?"단편":i.list.length+"화"}</span></div><h3${i.adult?' class="red"':""}>${esc(i.name)}</h3><div class="d">${esc(i.list[0].date)}</div><span class="go">${i.single?"글 읽기":"작품 읽기"} →</span></a>`).join(""):"<p style='color:var(--mu)'>아직 글이 없어요.</p>";
 $("#cnt").textContent=L.length+" WORKS"}
-function route(){const [,t,a,b]=(location.hash||"#/").split("/").map(decodeURIComponent);scrollTo(0,0);
+function route(){const [,t,a,b]=(location.hash||"#/").split("/").map(decodeURIComponent);scrollTo(0,0);$("#main").className="w"+(t=="p"?" post":"");
 if(t=="p"){const p=P.find(x=>x.id==+a);if(!p)return;
 const sib=p.series?P.filter(x=>x.series==p.series&&x.category==p.category).sort(ord):[],i=sib.indexOf(p),pv=sib[i-1],nx=sib[i+1];
 const back=p.series?`#/s/${enc(p.category)}/${enc(p.series)}`:`#/c/${enc(p.category)}`;
 const body=String(p.body||"").split(/\n\s*\n/).filter(x=>x.trim()).map(x=>`<p>${esc(x).replace(/\n/g,"<br>")}</p>`).join("");
 $("#main").innerHTML=`<a class="back" href="${back}">← ${esc(p.series||p.category)}로 돌아가기</a><article class="pg"><div class="tl">글자 <button onclick="fs(-1)">가-</button><button onclick="fs(1)">가+</button></div><h1${cls(p)}>${esc(T(p))}</h1><div class="m">${esc(p.date)} · ${esc(p.category)}${p.series?" / "+esc(p.series):""}</div>${p.adult?'<div class="warn">⚠️ 본 글은 성인 전용 콘텐츠를 포함하고 있습니다.</div>':""}<div class="b">${body}</div></article>
 <div class="pn">${pv?`<a href="#/p/${pv.id}">← 이전 화</a>`:"<span></span>"}${nx?`<a href="#/p/${nx.id}">다음 화 →</a>`:"<span></span>"}</div><a class="back" href="${back}">← ${esc(p.series||p.category)}로 돌아가기</a><div class="foot"></div>`;return}
-if(t=="s"||(t=="c"&&b)){const L=P.filter(p=>p.category==a&&p.series==b).sort(ord);
-$("#main").innerHTML=`<a class="back" href="#/">← 작품 보관함</a><div class="pg"><span class="tag" style="border:1px solid var(--line);border-radius:99px;padding:1px 10px;font-size:12px">${esc(a)}</span><h1>${esc(b)}</h1><div class="m" style="margin-bottom:24px">${L.length}화</div></div>`+L.map(p=>`<a class="row" href="#/p/${p.id}"><b${cls(p)}>${esc(T(p))}</b><span>${esc(p.date)}</span></a>`).join("")+`<div class="foot"></div>`;return}
+if(t=="s"||(t=="c"&&b)){const cv=(S.find(s=>s.name==b)||{}).cover,L=P.filter(p=>p.category==a&&p.series==b).sort(ord);
+$("#main").innerHTML=`<a class="back" href="#/">← 작품 보관함</a>${cv?`<img class="scv" src="${esc(cv)}" alt="">`:""}<div class="pg"><span class="tag" style="border:1px solid var(--line);border-radius:99px;padding:1px 10px;font-size:12px">${esc(a)}</span><h1>${esc(b)}</h1><div class="m" style="margin-bottom:24px">${L.length}화</div></div>`+L.map(p=>`<a class="row" href="#/p/${p.id}"><b${cls(p)}>${esc(T(p))}</b><span>${esc(p.date)}</span></a>`).join("")+`<div class="foot"></div>`;return}
 const cat=t=="c"?a:"",cs=["소설","원작","끄적끄적"];
 $("#main").innerHTML=(cat?"":`<section class="hero"><p class="eyebrow">${HERO.eyebrow} · ${new Date().getFullYear()}</p><h1>${HERO.title}<br><em>${HERO.em}</em></h1><p class="sub">${HERO.sub}</p></section>`)+
 `<div class="shelf-h"><div><small>MY READING SHELF</small><h2>작품 보관함</h2></div><div><input id="q" placeholder="작품 검색" value="${esc(Q)}"> <small id="cnt" style="display:inline;margin-left:8px;color:var(--mu)"></small></div></div>

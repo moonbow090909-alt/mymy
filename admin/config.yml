@@ -3,6 +3,7 @@ backend:
   repo: moonbow090909-alt/mymy
   branch: main
 media_folder: images
+public_folder: /images
 locale: ko
 collections:
   - name: post
@@ -46,6 +47,7 @@ collections:
             summary: "{{fields.name}}"
             fields:
               - {label: 작품명, name: name, widget: string}
+              - {label: 표지 이미지 (선택), name: cover, widget: image, required: false}
               - {label: 분류, name: category, widget: select, options: [소설, 원작, 끄적끄적]}
   - name: legacy
     label: 예전 글 (이전 방식)
