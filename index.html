@@ -53,7 +53,7 @@ $("#shelf").innerHTML=L.length?L.map(i=>`<a class="card" href="${i.href}">${i.co
 $("#cnt").textContent=L.length+" WORKS"}
 const inl=t=>esc(t.replace(/\\([\\`*_{}\[\]()#+\-.!>~|"'“”])/g,(_,c)=>"\u0001"+c.charCodeAt(0)+"\u0002")).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/(^|[^*])\*([^*\s][^*]*?)\*/g,"$1<i>$2</i>").replace(/~~(.+?)~~/g,"<s>$1</s>").replace(/&lt;u&gt;(.+?)&lt;\/u&gt;/g,"<u>$1</u>").replace(/\u0001(\d+)\u0002/g,(_,n)=>esc(String.fromCharCode(+n)));
 function render(b){const o=[];let u=[],bl=0;const f=()=>{if(u.length){o.push("<p>"+u.join("<br>")+"</p>");u=[]}};
-String(b||"").replace(/\r/g,"").replace(/<br\s*\/?>/gi,"\n").split("\n").forEach(l=>{const t=l.replace(/\\$/,"").trim();if(!t||t=="&nbsp;"||t=="\u00a0"){bl++;return}
+String(b||"").replace(/\r/g,"").replace(/<br\s*\/?>/gi,"\n").split("\n").forEach(l=>{const t=l.replace(/\\$/,"").trim().replace(/^\\\[(상대|나|가운데|오른쪽)\\\]/,"[$1]");if(!t||t=="&nbsp;"||t=="\u00a0"){bl++;return}
 if(bl>0){f();if(bl>1)o.push(`<div style="height:${(bl-1)*1.6}em"></div>`)}bl=0;
 let m;if(m=t.match(/^\[(상대|나)\]\s*(.*)$/)){f();o.push(`<div class="bb ${m[1]=="나"?"r":"l"}"><div>${inl(m[2])}</div></div>`)}
 else if(m=t.match(/^\[(가운데|오른쪽)\]\s*(.*)$/)){f();o.push(`<p class="${m[1]=="가운데"?"ct":"rt"}">${inl(m[2])}</p>`)}
