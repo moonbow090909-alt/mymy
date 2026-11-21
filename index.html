@@ -44,10 +44,11 @@ Promise.all([J("data/all.json").catch(()=>J("data/posts.json")),J("data/series.j
 P=(a.posts||[]).map((p,i)=>({...p,id:i,adult:p.adult===true}));S=b.series||[];
 P.sort((x,y)=>String(y.date).localeCompare(String(x.date))||x.id-y.id);route()}).catch(()=>$("#main").textContent="글을 불러오지 못했어요.");
 addEventListener("hashchange",route);
+const k=i=>i.single?i.list[0].title:i.name;
 function items(cat){const m={},out=[];P.forEach(p=>{if(cat&&p.category!=cat)return;
 if(p.series){const k=p.category+"|"+p.series;(m[k]=m[k]||{cat:p.category,name:p.series,cover:(S.find(s=>s.name==p.series)||{}).cover||"",list:[],href:`#/s/${enc(p.category)}/${enc(p.series)}`}).list.push(p)}
 else out.push({cat:p.category,name:T(p),list:[p],single:1,adult:p.adult,href:`#/p/${p.id}`})});
-return [...Object.values(m),...out].sort((x,y)=>String(y.list[0].date).localeCompare(String(x.list[0].date)))}
+return [...Object.values(m),...out].sort((x,y)=>k(x).localeCompare(k(y),"en",{numeric:true,sensitivity:"base"}))}
 function shelf(cat){const q=Q.trim().toLowerCase(),L=items(cat).filter(i=>!q||i.name.toLowerCase().includes(q));
 $("#shelf").innerHTML=L.length?L.map(i=>`<a class="card" href="${i.href}">${i.cover?`<img class="cv" src="${esc(i.cover)}" alt="" loading="lazy">`:""}<div class="top"><span class="tag">${esc(i.cat)}</span><span>${i.single?"단편":i.list.length+"화"}</span></div><h3${i.adult?' class="red"':""}>${esc(i.name)}</h3><div class="d">${esc(i.list[0].date)}</div><span class="go">${i.single?"글 읽기":"작품 읽기"} →</span></a>`).join(""):"<p style='color:var(--mu)'>아직 글이 없어요.</p>";
 $("#cnt").textContent=L.length+" WORKS"}
